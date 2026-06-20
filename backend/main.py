@@ -73,7 +73,7 @@ async def ai_medicine_info(request: MedRequest):
 # --- 3. LIVE MEDICAL NEWS ---
 @app.get("/api/news")
 async def get_medical_news():
-    feed_url = "https://www.nih.gov/news-events/news-releases/feed","https://feeds.bbci.co.uk/news/health/rss.xml"
+    feed_url = "https://www.nih.gov/news-events/news-releases/feed"
 
     feed = feedparser.parse(feed_url)
 
