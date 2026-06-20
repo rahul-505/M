@@ -73,13 +73,27 @@ async def ai_medicine_info(request: MedRequest):
 # --- 3. LIVE MEDICAL NEWS ---
 @app.get("/api/news")
 async def get_medical_news():
-    feed_url = "https://www.nih.gov/news-events/news-releases/feed"
+    try:
+        feed_url = "https://www.nih.gov/news-events/news-releases/feed"
 
-    feed = feedparser.parse(feed_url)
+        feed = feedparser.parse(feed_url)
 
-    return {
-        "entries_found": len(feed.entries),
-        "feed_title": getattr(feed.feed, "title", "No title"),
-        "bozo": feed.bozo,
-        "error": str(feed.bozo_exception) if feed.bozo else None
-    }
+        news_items = []
+
+        for entry in feed.entries[:5]:
+            news_items.append({
+                "title": entry.get("title", "No Title"),
+                "description": entry.get("summary", ""),
+                "link": entry.get("link", "#")
+            })
+
+        return {"news": news_items}
+
+    except Exception as e:
+        return {
+            "news": [{
+                "title": f"News Error: {str(e)}",
+                "description": "",
+                "link": "#"
+            }]
+        }
