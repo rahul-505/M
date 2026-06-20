@@ -183,16 +183,7 @@ export default function MedMindApp() {
           ))}
         </div>
 
-        <div className="p-4 border-t border-white/10 flex items-center gap-3">
-          <div className="w-8 h-8 bg-blue-600 flex items-center justify-center text-white text-xs font-bold rounded-sm">PR</div>
-          <div className="flex-1">
-            <div className="text-slate-200 text-xs font-medium">Rahul P.</div>
-            <div className="text-slate-500 text-[10px]">Patient MED-0042</div>
-          </div>
-          {/* <button onClick={() => setIsLoggedIn(false)} className="text-slate-400 hover:text-white"> */}
-            {/* <LogOut size={14} /> */}
-          {/* </button> */}
-        </div>
+       
       </div>
 
       {/* MAIN CONTENT AREA */}
