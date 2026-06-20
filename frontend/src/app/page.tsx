@@ -57,9 +57,9 @@ export default function MedMindApp() {
 
       const data = await response.json();
 
-      console.log(data);
+      
 
-      setNews(data.news);
+      setNews(data.news || []);
     } catch (error) {
       console.error(error);
     }
