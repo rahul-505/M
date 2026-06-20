@@ -111,7 +111,7 @@ export default function MedMindApp() {
       const response = await fetch('https://medmind-backend-d2rv.onrender.com/api/medicine', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ medicine_name: medicineName })
+        body: JSON.stringify({ medicine_name: text })
       });
       
       // 2. Wait for the AI to process and return the data
