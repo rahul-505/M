@@ -73,20 +73,13 @@ async def ai_medicine_info(request: MedRequest):
 # --- 3. LIVE MEDICAL NEWS ---
 @app.get("/api/news")
 async def get_medical_news():
-    try:
-        # Fetch real, live health news from a public RSS feed (e.g., Medical News Today)
-        feed_url = 'https://rss.medicalnewstoday.com/featurednews.xml'
-        feed = feedparser.parse(feed_url)
-        
-        news_items = []
-        # Grab the top 5 most recent articles
-        for entry in feed.entries[:5]:
-            news_items.append({
-                "title": entry.title,
-                "link": entry.link,
-                "published": entry.published if hasattr(entry, 'published') else "Recent"
-            })
-            
-        return {"news": news_items}
-    except Exception as e:
-        return {"news": [{"title": "Failed to load live news", "link": "#", "published": "Error"}]}
+    feed_url = "https://rss.medicalnewstoday.com/featurednews.xml"
+
+    feed = feedparser.parse(feed_url)
+
+    return {
+        "entries_found": len(feed.entries),
+        "feed_title": getattr(feed.feed, "title", "No title"),
+        "bozo": feed.bozo,
+        "error": str(feed.bozo_exception) if feed.bozo else None
+    }
