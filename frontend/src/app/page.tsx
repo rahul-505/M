@@ -85,7 +85,7 @@ export default function MedMindApp() {
 
     try {
       // Send the user's message to our Python FastAPI server
-      const response = await fetch('https://medmind-backend-d2rv.onrender.com', {
+      const response = await fetch('https://medmind-backend-d2rv.onrender.com/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text })
@@ -109,7 +109,7 @@ export default function MedMindApp() {
 
     try {
       // 1. Send the medicine name to our Python FastAPI server
-      const response = await fetch('https://medmind-backend-d2rv.onrender.com', {
+      const response = await fetch('https://medmind-backend-d2rv.onrender.com/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ medicine_name: text })
