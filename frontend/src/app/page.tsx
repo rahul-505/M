@@ -45,24 +45,25 @@ export default function MedMindApp() {
 
   // Specialist State
   const [selectedSpec, setSelectedSpec] = useState('All');
-  const [news, setNews] = useState([
-  {
-    title: "WHO Reports Progress in Global Vaccination Programs",
-    description: "Recent initiatives have increased vaccination coverage across several regions."
-  },
-  {
-    title: "New AI Tools Transform Healthcare Diagnostics",
-    description: "AI-assisted diagnosis systems are helping doctors detect diseases faster."
-  },
-  {
-    title: "Heart Health Awareness Campaign Launches Nationwide",
-    description: "Experts encourage regular exercise and healthy diets to reduce cardiac risks."
-  },
-  {
-    title: "Breakthrough Research in Diabetes Treatment",
-    description: "Scientists announce promising clinical trial results."
-  }
-]);
+  const [news, setNews] = useState([]);
+  useEffect(() => {
+    fetchNews();
+  }, []);
+  const fetchNews = async () => {
+    try {
+      const response = await fetch(
+        "https://medmind-backend-d2rv.onrender.com/api/news"
+      );
+
+      const data = await response.json();
+
+      console.log(data);
+
+      setNews(data.news);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     if (darkMode) document.documentElement.classList.add('dark');
@@ -460,7 +461,7 @@ export default function MedMindApp() {
               </h3>
 
               <div className="grid gap-4">
-                {news.map((article, index) => (
+                {news.map((article: any, index: number) => (
                   <div
                     key={index}
                     className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-4 rounded-sm"
@@ -470,8 +471,18 @@ export default function MedMindApp() {
                     </h4>
 
                     <p className="text-xs text-slate-600 dark:text-slate-400">
-                      {article.description}
+                      {article.description || article.summary}
                     </p>
+                    {article.link && (
+                      <a
+                        href={article.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 text-xs mt-2 inline block"
+                      >
+                        Read More >>
+                      </a>
+                    )}
                   </div>
                 ))}
               </div>
