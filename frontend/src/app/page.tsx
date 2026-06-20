@@ -57,8 +57,6 @@ export default function MedMindApp() {
 
       const data = await response.json();
 
-      
-
       setNews(data.news || []);
     } catch (error) {
       console.error(error);
@@ -471,7 +469,7 @@ export default function MedMindApp() {
                     </h4>
 
                     <p className="text-xs text-slate-600 dark:text-slate-400">
-                      {article.description || article.summary}
+                      {article.description || "No description available"}
                     </p>
                     {article.link && (
                       <a
