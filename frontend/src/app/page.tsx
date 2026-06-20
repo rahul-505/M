@@ -478,7 +478,7 @@ export default function MedMindApp() {
                         rel="noopener noreferrer"
                         className="text-blue-500 text-xs mt-2 inline block"
                       >
-                        Read More >>
+                        Read More &rarr;
                       </a>
                     )}
                   </div>
